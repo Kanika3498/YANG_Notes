@@ -1,0 +1,41 @@
+module data {
+
+  namespace "http://example.com/data";
+  prefix company;
+
+  import ietf-yang-types { prefix yang; }
+
+   typedef street {
+    type string;
+    description
+      "The street number, including the type, e.g,
+       ' 1st cross street'.";
+  }
+
+  container company {
+    config true;
+    key name;
+    leaf name { type string; }
+    list address {
+      leaf street { type street; }
+      leaf district { type string; mandatory true; }
+      leaf state { type string; mandatory true; }
+    }
+
+    list employees {
+      list employee {
+        key "firstname";
+        unique contact-no;
+        leaf firstname { type leafref { path "/employees/name"; }  }
+        leaf lastname { type string; }
+        leaf age { type uint16;  default 0; }
+        list address {
+         leaf street { type street; }
+         leaf district { type string; mandatory true; }
+         leaf state { type string; mandatory true; }
+        }
+        leaf-list contact-no { type uint16; mandatory true; }
+      }
+    }
+  }
+}
