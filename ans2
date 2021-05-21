@@ -1,0 +1,38 @@
+ <rpc message-id="101"
+          xmlns="http://example.com/data">
+       <get-config>
+         <source>
+           <running/>
+         </source>
+         <filter type="subtree">
+           <company xmlns="http://example.com/schema/1.2/config">
+             <employees>
+               <employee>
+                 <firstname>ram</firstname>
+               </employee>
+             </employees>
+           </company>
+         </filter>
+       </get-config>
+     </rpc>
+
+     <rpc-reply message-id="101"
+          xmlns="http://example.com/data">
+       <data>
+         <company xmlns="http://example.com/schema/1.2/config">
+           <employees>
+             <employee>
+               <firstname> ram </firstname>
+               <lastname> kumar  </lastname>
+               <age> 22 </age>
+               <address>
+                 <street> 2nd cross street </street>
+                 <district> madurai </district>
+                 <state> tamilnadu </state>
+               </address>
+               <contact-no> 8765345782 </contact-no>
+             </employee>
+           </employees>
+         </company>
+       </data>
+     </rpc-reply>
