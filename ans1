@@ -12,28 +12,26 @@ module data {
        ' 1st cross street'.";
   }
 
+  grouping address {
+      leaf street { type street; }
+      leaf district { type string; mandatory true; }
+      leaf state { type string; mandatory true; }
+  }
+
   container company {
     config true;
     key name;
     leaf name { type string; }
-    list address {
-      leaf street { type street; }
-      leaf district { type string; mandatory true; }
-      leaf state { type string; mandatory true; }
-    }
+    uses address;
 
-    list employees {
+    container employees {
       list employee {
         key "firstname";
         unique contact-no;
-        leaf firstname { type leafref { path "/employees/name"; }  }
+        leaf firstname { type string;  }
         leaf lastname { type string; }
         leaf age { type uint16;  default 0; }
-        list address {
-         leaf street { type street; }
-         leaf district { type string; mandatory true; }
-         leaf state { type string; mandatory true; }
-        }
+        uses address;
         leaf-list contact-no { type uint16; mandatory true; }
       }
     }
